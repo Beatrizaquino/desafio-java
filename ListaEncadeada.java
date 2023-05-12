@@ -52,32 +52,40 @@ public class ListaEncadeada {
 		inicio = inicio.prox;
 		return valor;
 	}
+
+
+	public ListaEncadeada clone() {
+		ListaEncadeada copia = new ListaEncadeada();
+		Elemento atual = this.inicio;
+		Elemento anterior = null;
+		while (atual != null) {
+			Elemento novo = new Elemento(atual.valor);
+			if (anterior == null) {
+				copia.inicio = novo;
+			} else {
+				anterior.prox = novo;
+			}
+			anterior = novo;
+			atual = atual.prox;
+		}
+		return copia;		
+	}
 	
 	// Crie aqui outro método na classe ListaEncadeada
-
-	/**
-	 * Método principal. Para testar o código e ver
-	 * se os métodos funcionam como deveriam.
-	 */
 	public static void main(String[] args) {
-		System.out.println("OK");
-		
-		// Criando uma lista inicialmente vazia.
+	
 		ListaEncadeada lista = new ListaEncadeada();
-
-		// Testando o método addFirst
 		lista.addFirst("Batata");
 		lista.addFirst("Cenoura");
 		lista.addFirst("Melancia");
-	
-		// Se printar na tela esses três valores é porque adicionou
-		System.out.println("Lista antes de remover: " + lista.inicio);
 		
-		// Testando o método removeFirst
-		String removido = lista.removeFirst();
-		System.out.println("Removido: "+removido);
+		ListaEncadeada copia = lista.clone();
 		
-		// Se printar na tela a lista sem o que foi removido é porque removeu
-		System.out.println("Lista depois de remover: " + lista.inicio);
+		// Adicionando um novo elemento apenas na cópia da lista
+		copia.addFirst("Ameixa");
+		
+		System.out.println("Original: " + lista.inicio);
+		System.out.println("Cópia: " + copia.inicio);
 	}
+
 }
